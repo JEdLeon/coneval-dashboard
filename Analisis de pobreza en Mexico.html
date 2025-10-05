@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Dashboard - Índices de Pobreza en México</title>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f8f9fa;
+    }
+
+    h1 {
+      text-align: center;
+      padding: 20px;
+      background: #343a40;
+      color: #fff;
+      margin: 0;
+    }
+
+    .dashboard {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-gap: 20px;
+      padding: 20px;
+    }
+
+    .chart-box {
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+    }
+
+    .chart-title {
+      text-align: center;
+      font-size: 16px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    #chart7 {
+      grid-column: span 2;
+      /* el último gráfico ocupará todo el ancho */
+    }
+  </style>
+  <script type="text/javascript">
+    google.charts.load('current', { 'packages': ['bar', 'line', 'corechart'] });
+    google.charts.setOnLoadCallback(drawAllCharts);
+
+    function drawAllCharts() {
+      drawChart1();
+      drawChart2();
+      drawChart3();
+      drawChart4();
+      drawChart5();
+      drawChart6();
+      drawChart7();
+    }
+
+    function drawChart1() {
+      var data = google.visualization.arrayToDataTable([
+        ['Entidad federativa', '2008', '2010', '2012', '2014', '2016', '2018'],
+        ['Aguascalientes', 435.3, 456.8, 467.6, 442.9, 369.7, 351.5],
+        ['Baja California', 809.7, 1019.8, 1010.1, 984.9, 789.1, 848.4],
+        ['Baja California Sur', 130.5, 203.0, 211.3, 226.2, 175.6, 151.7],
+        ['Campeche', 373.1, 425.3, 387.9, 391.0, 405.0, 440.4],
+        ['Coahulia', 885.8, 775.9, 799.3, 885.8, 745.9, 691.1],
+        ['Colima', 173.4, 230.3, 237.2, 244.9, 248.7, 235.6],
+        ['Chiapas', 3682.3, 3866.3, 3782.3, 3961.0, 4114.0, 4174.6],
+        ['Chihuahua', 1105.1, 1371.6, 1272.7, 1265.5, 1150.0, 1005.7],
+        ['Ciudad de México', 2465.7, 2537.2, 2565.3, 2502.5, 2434.4, 2682.7],
+        ['Durango', 791.4, 864.2, 858.7, 761.2, 643.3, 680.0],
+        ['Guanajuato', 2403.6, 2703.7, 2525.8, 2683.3, 2489.7, 2587.8],
+        ['Guerrero', 2319.6, 2330.0, 2442.9, 2315.4, 2314.7, 2412.2],
+        ['Hidalgo', 1443.6, 1477.1, 1465.9, 1547.8, 1478.8, 1311.1],
+        ['Jálisco', 2657.1, 2766.7, 3051.0, 2780.2, 2560.6, 2337.6],
+        ['México', 6578.2, 6712.1, 7328.7, 8269.9, 8230.2, 7546.5],
+        ['Michoacán', 2411.2, 2424.8, 2447.7, 2708.6, 2565.9, 2161.8],
+        ['Morelos', 857.6, 782.2, 843.5, 993.7, 965.9, 1013.3],
+        ['Nayarit', 444.1, 461.2, 553.5, 488.8, 470.1, 451.0],
+        ['Nuevo León', 976.3, 994.4, 1132.9, 1022.7, 737.8, 773.0],
+        ['Oaxaca', 2354.4, 2596.3, 2434.6, 2662.7, 2847.3, 2714.7],
+        ['Puebla', 3705.6, 3616.0, 3878.1, 3958.8, 3728.2, 3763.7],
+        ['Querétaro', 629.1, 767.0, 707.4, 675.7, 635.7, 579.2],
+        ['Quintana Roo', 428.1, 471.7, 563.3, 553.0, 471.0, 474.8],
+        ['San Luis Potosí', 1304.4, 1375.3, 1354.2, 1338.1, 1267.7, 1229.0],
+        ['Sinaloa', 905.6, 1048.6, 1055.6, 1167.1, 929.7, 946.9],
+        ['Sonora', 716.9, 905.2, 821.3, 852.1, 831.4, 863.0],
+        ['Tabaso', 1188.0, 1291.6, 1149.4, 1169.8, 1228.1, 1320.2],
+        ['Tamaulipas', 1097.7, 1301.7, 1315.6, 1330.7, 1156.2, 1287.9],
+        ['Tlaxcala', 687.7, 719.0, 711.9, 745.1, 701.8, 645.8],
+        ['Veracruz', 3879.0, 4448.0, 4141.8, 4634.2, 5049.5, 5088.6],
+        ['Yucatán', 907.0, 958.5, 996.9, 957.9, 901.9, 900.5],
+        ['Zacatecas', 742.2, 911.5, 835.5, 819.8, 780.3, 755.2]
+      ]);
+
+      var options = {
+        chartArea: { width: '80%' },
+        vAxis: { title: 'Entidad Federativa' },
+        bars: 'horizontal',
+        height: 1500,
+        axes: {
+          x: {
+            0: { side: 'top', label: 'Miles de personas' }
+          }
+        },
+        colors: ['#1a73e8', '#34a853', '#fbbc05', '#ea4335', '#9c27b0', '#ff7043']
+
+      };
+
+      var chart = new google.charts.Bar(document.getElementById('chart1'));
+      chart.draw(data, options);
+    }
+
+    function drawChart2() {
+      var data = google.visualization.arrayToDataTable([
+        ['Entidad federativa', '2008', '2010', '2012', '2014', '2016', '2018'],
+        ['Aguascalientes', 48.3, 45.1, 42.0, 26.7, 30.2, 15.6],
+        ['Baja California', 104.1, 109.1, 91.5, 105.5, 39.7, 59.3],
+        ['Baja California Sur', 16.4, 30.3, 25.8, 29.5, 12.8, 12.6],
+        ['Campeche', 97.2, 116.1, 90.7, 99.2, 61.6, 93.0],
+        ['Coahulia', 83.7, 81.9, 92.7, 109.7, 49.7, 44.5],
+        ['Colima', 11.0, 16.7, 27.4, 24.4, 19.3, 18.2],
+        ['Chiapas', 1850.8, 1885.4, 1629.2, 1654.4, 1498.6, 1623.3],
+        ['Chihuahua', 230.5, 231.9, 136.3, 200.3, 120.9, 99.8],
+        ['Ciudad de México', 189.1, 192.4, 219.0, 150.5, 155.1, 153.3],
+        ['Durango', 187.2, 175.5, 128.0, 93.0, 49.6, 40.4],
+        ['Guanajuato', 430.8, 469.5, 391.9, 317.6, 257.6, 253.3],
+        ['Guerrero', 1098.2, 1097.6, 1111.5, 868.1, 825.2, 971.4],
+        ['Hidalgo', 401.3, 364.0, 276.7, 350.5, 234.3, 181.5],
+        ['Jálisco', 321.0, 392.4, 446.2, 253.2, 144.9, 244.5],
+        ['México', 1046.5, 1341.2, 945.7, 1206.9, 1057.0, 865.7],
+        ['Michoacán', 668.9, 598.0, 650.3, 641.9, 435.3, 284.4],
+        ['Morelos', 153.1, 125.4, 117.2, 149.3, 115.4, 147.0],
+        ['Nayarit', 66.2, 92.7, 138.7, 102.1, 99.4, 76.2],
+        ['Nuevo León', 118.7, 86.4, 117.5, 66.7, 31.5, 25.2],
+        ['Oaxaca', 1079.0, 1133.5, 916.6, 1130.3, 1087.2, 951.8],
+        ['Puebla', 1088.1, 1001.7, 1059.1, 991.3, 561.9, 551.9],
+        ['Querétaro', 97.6, 137.5, 98.7, 76.1, 59.7, 41.2],
+        ['Quintana Roo', 98.3, 87.5, 122.2, 107.6, 69.2, 59.8],
+        ['San Luis Potosí', 394.8, 402.6, 342.9, 258.5, 213.8, 207.6],
+        ['Sinaloa', 128.9, 156.3, 130.2, 155.8, 87.1, 82.3],
+        ['Sonora', 115.2, 140.1, 139.8, 95.6, 75.3, 80.6],
+        ['Tabaso', 348.5, 306.9, 330.8, 260.3, 284.2, 302.5],
+        ['Tamaulipas', 157.2, 183.4, 160.2, 151.6, 103.6, 121.8],
+        ['Tlaxcala', 109.9, 118.2, 112.2, 82.6, 74.7, 41.7],
+        ['Veracruz', 1276.4, 1449.0, 1122.0, 1370.5, 1332.5, 1457.9],
+        ['Yucatán', 170.9, 232.5, 200.6, 223.2, 132.4, 147.1],
+        ['Zacatecas', 140.4, 164.1, 115.6, 89.4, 56.1, 54.4]
+      ]);
+
+
+      var options = {
+        chartArea: { width: '80%' },
+        vAxis: { title: 'Entidad Federativa' },
+        bars: 'horizontal',
+        height: 1500,
+        axes: {
+          x: {
+            0: { side: 'top', label: 'Miles de personas' }
+          }
+        },
+        colors: ['#1a73e8', '#34a853', '#fbbc05', '#ea4335', '#9c27b0', '#ff7043']
+
+      };
+
+      var chart = new google.charts.Bar(document.getElementById('chart2'));
+      chart.draw(data, options);
+    }
+
+    function drawChart3() {
+      var data = google.visualization.arrayToDataTable([
+        ['Año', 'Discapacidad - Pobreza', 'Discapacidad - Pobreza Extrema', 'Sin Discapacidad - Pobreza', 'Sin Discapacidad - Pobreza Extrema'],
+        ['2010', 36.3, 13.9, 34.7, 11.2],
+        ['2012', 38.5, 12.7, 35.5, 9.6],
+        ['2014', 41.4, 12.7, 36.3, 9.3],
+        ['2016', 39.4, 10.0, 35.6, 7.5],
+        ['2018', 38.8, 9.8, 34.1, 7.3]
+      ]);
+
+      var options = {
+        curveType: 'none',
+        legend: { position: 'bottom' },
+        hAxis: { title: 'Año' },
+        axes: {
+          y: {
+            0: { side: 'left', label: 'Porcentaje (%)' }
+          }
+        },
+        pointSize: 4,
+        colors: ['#1a73e8', '#ea4335', '#34a853', '#fbbc05']
+      };
+
+      var chart = new google.charts.Line(document.getElementById('chart3'));
+      chart.draw(data, options);
+    }
+
+    function drawChart4() {
+      var data = google.visualization.arrayToDataTable([
+        ['Año', 'Indígena - Pobreza', 'Indígena - Pobreza Extrema', 'No Indígena - Pobreza', 'No Indígena - Pobreza Extrema'],
+        ['2008', 35.3, 40.7, 32.7, 8.7],
+        ['2010', 34.8, 44.7, 34.4, 8.9],
+        ['2012', 38.8, 38.0, 35.1, 7.9],
+        ['2014', 38.5, 39.9, 36.2, 7.4],
+        ['2016', 42.8, 34.8, 35.2, 5.8],
+        ['2018', 39.2, 35.6, 33.8, 5.6]
+      ]);
+
+      var options = {
+        hAxis: { title: 'Año' },
+        vAxis: { title: 'Porcentaje (%)' },
+        legend: { position: 'top' },
+        pointSize: 4,
+        colors: ['#8e24aa', '#d81b60', '#039be5', '#43a047']
+      };
+
+      var chart = new google.visualization.AreaChart(document.getElementById('chart4'));
+      chart.draw(data, options);
+    }
+
+    function drawChart5() {
+      var data = google.visualization.arrayToDataTable([
+        ['Grupo', 'Porcentaje'],
+        ['Rural - Pobreza', 38.9],
+        ['Rural - Pobreza Extrema', 16.4],
+        ['Urbano - Pobreza', 33.0],
+        ['Urbano - Pobreza Extrema', 4.5]
+      ]);
+
+      var options = {
+        colors: ['#f57c00', '#ef6c00', '#0288d1', '#039be5'],
+        legend: { position: 'top' }
+      };
+
+      var chart = new google.visualization.PieChart(document.getElementById('chart5'));
+      chart.draw(data, options);
+    }
+
+    function drawChart6() {
+      var data = google.visualization.arrayToDataTable([
+        ['Grupo de Edad', 'Pobreza', 'Pobreza Extrema'],
+        ['Menores de 18 años', 40.3, 9.3],
+        ['Jóvenes (19–29 años)', 35.3, 7.1],
+        ['Adultos Mayores (65+)', 34.4, 6.8]
+      ]);
+
+      var options = {
+        chartArea: { width: '70%' },
+        hAxis: { title: 'Grupo de Edad' },
+        vAxis: { title: 'Porcentaje (%)' },
+        colors: ['#1a73e8', '#ea4335'],
+        legend: { position: 'top' },
+        bar: { groupWidth: '60%' }
+      };
+
+      var chart = new google.visualization.ColumnChart(document.getElementById('chart6'));
+      chart.draw(data, options);
+    }
+
+  </script>
+</head>
+
+<body>
+  <h1>Dashboard: Índices de Pobreza en México (2008 - 2018)</h1>
+  <div class="dashboard">
+    <div class="chart-box">
+      <div class="chart-title">Personas en situación de pobreza por estado (2008–2018)</div>
+      <div id="chart1" style="height: auto;"></div>
+    </div>
+    <div class="chart-box">
+      <div class="chart-title">Personas en situación de pobreza extrema por estado (2008–2018)</div>
+      <div id="chart2" style="height: auto;"></div>
+    </div>
+    <div class="chart-box">
+      <div class="chart-title">Población situación de pobreza y pobreza extrema, con y sin discapacidad (2010-2018)
+      </div>
+      <div id="chart3" style="height: 500px;"></div>
+    </div>
+    <div class="chart-box">
+      <div class="chart-title">Población indígena y no indígena en situación de pobreza y pobreza extrema (2008-2018)
+      </div>
+      <div id="chart4" style="height: 500px;"></div>
+    </div>
+    <div class="chart-box">
+      <div class="chart-title">Población en situación de pobreza y pobreza extrema por lugar de residencia (2018)</div>
+      <div id="chart5" style="height: 500px;"></div>
+    </div>
+    <div class="chart-box">
+      <div class="chart-title">Población en situación de pobreza y pobreza extrema por grupos de edad (2018)</div>
+      <div id="chart6" style="height: 500px;"></div>
+    </div>
+  </div>
+</body>
+
+</html>
